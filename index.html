@@ -2,9 +2,41 @@
 <html>
 <head>
     <title>Gravity Sudoku</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        window.onload = function() {
+            // URL'deki "data=..." kısmını al
+            var urlParams = new URLSearchParams(window.location.search);
+            var data = urlParams.get('data');
+            
+            if (data) {
+                // Özel link formatını oluştur
+                var appLink = "gravitysudoku://share?data=" + data;
+                
+                // Sayfadaki butona basınca nereye gideceğini (href) ayarla
+                document.getElementById('play-btn').href = appLink;
+
+                // Kullanıcı beklemesin diye OTOMATİK OLARAK telefonu yönlendirmeyi dene (Magic trick)
+                window.location.href = appLink;
+            } else {
+                // Link paylaşımı değilse sadece App Store yönlendirme mesajı göster
+                document.getElementById('message').innerText = "Bu sayfada bir oyun paylaşımı bulunamadı.";
+                document.getElementById('play-btn').style.display = "none";
+            }
+        };
+    </script>
 </head>
-<body>
-    <h2 style="text-align: center; margin-top: 50px;">Oyun Yükleniyor...</h2>
-    <p style="text-align: center;">Eğer oyununuz otomatik olarak açılmadıysa, lütfen Gravity Sudoku'yu indirin.</p>
+<body style="font-family: -apple-system, sans-serif; text-align: center; padding: 40px; background-color: #f7f9fa; color: #1e1e1e;">
+    <h2 style="font-size: 26px; color: #004d40;">Gravity Sudoku</h2>
+    <p id="message" style="font-size: 16px; color: #555; margin-bottom: 30px;">
+        Arkadaşın sana bir oyun gönderdi! Oyun otomatik açılmadıysa aşağıdaki butona tıkla:
+    </p>
+
+    <a id="play-btn" href="#" 
+       style="display: inline-block; padding: 14px 28px; background-color: #00897b; color: white; text-decoration: none; border-radius: 25px; font-weight: 600; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        🔥 Oyunu Uygulamada Aç 🔥
+    </a>
+
+    <p style="margin-top: 50px; font-size: 13px; color: #999;">Uygulamanız hala yüklü değilse, lütfen mağazadan indirin.</p>
 </body>
 </html>
